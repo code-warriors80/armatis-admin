@@ -29,6 +29,12 @@ const Sidebar = () => {
 
       {/* Sidebar Links */}
       <nav className="mt-4 space-y-2">
+        {/* <SidebarItem
+          href="/"
+          icon={< size={20} />}
+          text="Home"
+          isCollapsed={isCollapsed}
+        /> */}
         <SidebarItem
           href="/Teams"
           icon={<Users size={20} />}
