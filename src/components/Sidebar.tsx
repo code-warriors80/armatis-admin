@@ -8,7 +8,8 @@ import {
   CreditCard,
   ShieldCheck,
   Menu,
-  LayoutDashboard
+  LayoutDashboard,
+  MessageCircle
 } from 'lucide-react';
 
 const sidebarItems = [
@@ -16,6 +17,7 @@ const sidebarItems = [
   { href: '/Teams', icon: <Users size={20} />, text: 'Teams' },
   { href: '/Products', icon: <CreditCard size={20} />, text: 'Products' },
   { href: '/Services', icon: <ShieldCheck size={20} />, text: 'Services' },
+  { href: '/Message', icon: <MessageCircle size={20} />, text: 'Messages' },
 ];
 
 export default function Sidebar() {
