@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import TeamMembers from "@/app/Teams/TeamMembersList";
+import AddTeamMember from "@/components/team/add-team";
 //import apiClient from "@/api/api-client";
 
 const Settings = () => {
@@ -15,13 +17,14 @@ const Settings = () => {
       {/* Main Content */}
       <main className="flex-1 px-6 py-8">
         <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+        <AddTeamMember />
       
         <div className="mt-8 bg-white shadow-md rounded-lg p-6">
           <h2 className="text-xl font-semibold mb-4">Update Teams info</h2>
           <p className="text-gray-600">Manage your Teams page here.</p>
 
           <div className="mt-6">
-            <TeamMembers/>
+            <TeamMembers />
           </div>
         </div>      
       </main>

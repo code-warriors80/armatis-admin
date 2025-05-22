@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import React from "react";
 import Sidebar from "@/components/Sidebar";
@@ -6,7 +7,6 @@ import Upload from "@/app/Teams/Upload/page";
 //import apiClient from "@/api/api-client";
 
 const Settings = () => {
-
   return (
     <div className="flex min-h-screen bg-gray-50 text-gray-900">
       {/* Sidebar */}
