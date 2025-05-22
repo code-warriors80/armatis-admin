@@ -1,39 +1,33 @@
 import React, { useState } from "react";
 import { Trash2 } from 'lucide-react';
 
-
-type TeamMember = {
+type Product = {
   id: number;
-  name: string;
-  qualifications: string;
-  position: string;
+  productname: string;
+  description: string;
 };
 
-export default function TeamMembersList() {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
+export default function ProductList() {
+  const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
-      name: "Dr. Jane Doe",
-      qualifications: "PhD, Computer Science",
-      position: "Lead Engineer",
+      productname: "Apple iPhone 14 Pro",
+      description: "The latest Apple iPhone with improved cameras and A16 Bionic chip.",
     },
     {
       id: 2,
-      name: "Mr. John Smith",
-      qualifications: "BSc, Software Engineering",
-      position: "Backend Developer",
+      productname: "Sony WH-1000XM5",
+      description: "Industry-leading noise-canceling over-ear headphones.",
     },
     {
       id: 3,
-      name: "Dr. Emma Brown",
-      qualifications: "PhD, Artificial Intelligence",
-      position: "Research Lead",
+      productname: "Dell XPS 13",
+      description: "Premium ultrabook with a bezel-less display and long battery life.",
     },
     {
       id: 4,
-      name: "Ms. Sarah Johnson",
-      qualifications: "MSc, Cybersecurity",
-      position: "Security Analyst",
+      productname: "Apple Watch Series 8",
+      description: "Smartwatch with advanced health tracking and new sensors.",
     },
   ]);
 
@@ -41,7 +35,7 @@ export default function TeamMembersList() {
 
   const handleDeleteConfirm = () => {
     if (selectedId !== null) {
-      setTeamMembers((prev) => prev.filter((member) => member.id !== selectedId));
+      setProducts((prev) => prev.filter((product) => product.id !== selectedId));
       setSelectedId(null);
     }
   };
@@ -49,53 +43,48 @@ export default function TeamMembersList() {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
-        Team Members
+        Product List
       </h2>
 
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white text-left text-sm font-semibold">
-              <th className="px-6 py-4">Name</th>
-              <th className="px-6 py-4">Qualifications</th>
-              <th className="px-6 py-4">Position</th>
+              <th className="px-6 py-4">Product Name</th>
+              <th className="px-6 py-4">Description</th>
               <th className="px-6 py-4 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {teamMembers.map((member, index) => (
+            {products.map((product, index) => (
               <tr
-                key={member.id}
+                key={product.id}
                 className={`border-b dark:border-gray-700 ${
                   index % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-50 dark:bg-gray-800"
                 }`}
               >
                 <td className="px-6 py-4 text-sm text-gray-900 dark:text-white font-medium">
-                  {member.name}
+                  {product.productname}
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
-                  {member.qualifications}
-                </td>
-                <td className="px-6 py-4 text-sm text-purple-600 dark:text-purple-400 font-semibold">
-                  {member.position}
+                  {product.description}
                 </td>
                 <td className="px-6 py-4 text-center">
                   <button
-                    onClick={() => setSelectedId(member.id)}
+                    onClick={() => setSelectedId(product.id)}
                     className="text-sm px-4 py-2 bg-gray-50 hover:bg-gray-100 text-red-500 rounded-md transition inline-flex items-center justify-center"
-                    title={`Delete ${member.name}`}
-                    aria-label={`Delete ${member.name}`}
+                    title={`Delete ${product.productname}`}
+                    aria-label={`Delete ${product.productname}`}
                   >
                     <Trash2 size={16} className="stroke-[1.5]" />
                   </button>
                 </td>
-
               </tr>
             ))}
-            {teamMembers.length === 0 && (
+            {products.length === 0 && (
               <tr>
-                <td colSpan={4} className="text-center px-6 py-8 text-gray-500 dark:text-gray-400">
-                  No team members found.
+                <td colSpan={3} className="text-center px-6 py-8 text-gray-500 dark:text-gray-400">
+                  No products found.
                 </td>
               </tr>
             )}
@@ -111,7 +100,7 @@ export default function TeamMembersList() {
               Confirm Deletion
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-              Are you sure you want to remove this team member?
+              Are you sure you want to remove this product?
             </p>
             <div className="flex justify-center gap-4">
               <button

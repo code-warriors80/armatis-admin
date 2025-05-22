@@ -3,6 +3,8 @@ import React from "react";
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import TeamMembers from "@/app/Teams/TeamMembersList";
+import ProductList from "./Products/ProductList";
+import ServiceList from "./Services/ServiceList"
 //import apiClient from "@/api/api-client";
 
 const Settings = () => {
@@ -17,11 +19,15 @@ const Settings = () => {
         <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
       
         <div className="mt-8 bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Update Teams info</h2>
-          <p className="text-gray-600">Manage your Teams page here.</p>
 
           <div className="mt-6">
             <TeamMembers/>
+          </div>
+          <div className="mt-6">
+            <ProductList/>
+          </div>
+          <div className="mt-6">
+            <ServiceList/>
           </div>
         </div>      
       </main>
