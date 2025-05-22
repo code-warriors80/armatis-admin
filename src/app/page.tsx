@@ -1,33 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// app/settings/page.tsx
 'use client';
-import React from "react";
-import Sidebar from "@/components/Sidebar";
+import React, { useState } from "react";
 import Header from "@/components/Header";
-import TeamMembers from "@/app/Teams/TeamMembersList";
+import DashboardPage from "@/components/dashboard/dashboard-stats-card";
+import Modal from "@/components/shared/custom-modal";
 import AddTeamMember from "@/components/team/add-team";
-//import apiClient from "@/api/api-client";
+import ServicesCard from "@/components/service/service-card";
+import TeamContainer from "@/components/team/team-container";
 
 const Settings = () => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const handleOpenAddModal = () => setIsAddModalOpen(true);
+  const handleCloseAddModal = () => setIsAddModalOpen(false);
 
   return (
-    <div className="flex min-h-screen bg-gray-50 text-gray-900">
-      {/* Sidebar */}
-      <Sidebar />
+    <div className="px-4 sm:px-6 lg:px-8 py-6 bg-gray-50 min-h-screen">
+      <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+      <DashboardPage />
 
-      {/* Main Content */}
-      <main className="flex-1 px-6 py-8">
-        <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <TeamContainer onAddMember={handleOpenAddModal} />
+        <ServicesCard />
+      </div>
+
+      <Modal isOpen={isAddModalOpen} onClose={handleCloseAddModal} title="Add Team Member">
         <AddTeamMember />
-      
-        <div className="mt-8 bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">Update Teams info</h2>
-          <p className="text-gray-600">Manage your Teams page here.</p>
-
-          <div className="mt-6">
-            <TeamMembers />
-          </div>
-        </div>      
-      </main>
+      </Modal>
     </div>
   );
 };

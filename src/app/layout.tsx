@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 
@@ -9,8 +10,14 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="Inter">
-        {children}
+      <body className="Inter overflow-y-hidden">
+        <div className="flex min-h-screen bg-gray-50 text-gray-900">
+          {/* Sidebar */}
+          <Sidebar />
+          <div className="flex-1 p-5 overflow-y-scroll h-screen">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

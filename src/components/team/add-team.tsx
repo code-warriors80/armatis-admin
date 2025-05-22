@@ -81,9 +81,7 @@ export default function AddTeamMember() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow mt-10">
-      <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Add Team Member</h2>
-
+    <div className="max-w-2xl mx-auto bg-white">
       <form onSubmit={handleSubmit} className="space-y-5">
         <input
           type="text"
@@ -149,7 +147,7 @@ export default function AddTeamMember() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-md transition"
+          className="w-full bg-[#EE2A55] text-white py-2 px-4 rounded-md transition"
         >
           {loading ? 'Adding...' : 'Add Member'}
         </button>
