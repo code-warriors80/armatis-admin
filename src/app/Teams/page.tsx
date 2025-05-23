@@ -1,31 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import React from "react";
-import Sidebar from "@/components/Sidebar";
+import React, {useState} from "react";
 import Header from "@/components/Header";
-import Upload from "@/app/Teams/Upload/page";
-//import apiClient from "@/api/api-client";
+import TeamList from "@/components/team/team-list";
+import Modal from "@/components/shared/custom-modal";
+import AddTeamMember from "@/components/team/add-team";
 
-const Settings = () => {
+const TeamsPage = () => {
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const handleOpenAddModal = () => setIsAddModalOpen(true);
+  const handleCloseAddModal = () => setIsAddModalOpen(false);
   return (
-    <div className="flex min-h-screen bg-gray-50 text-gray-900">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
-      <main className="flex-1 px-6 py-8">
+    <div className="">
         <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
         
-        <div className="mt-8 bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Add new team Member</h2>
-            <p className="text-gray-600">Manage your Teams page here.</p>
-            <div className="mt-2">
-              <Upload />
+        <div className="mt-5">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800">Teams Members</h2>
+              <p className="text-gray-600">Manage your Teams Members here.</p>
             </div>
+            <button
+              onClick={handleOpenAddModal}
+              className="bg-[#EE2A55] text-white px-4 py-2 rounded-md transition hover:bg-pink-600"
+            >
+              Add Member
+            </button>
+          </div>
+          <TeamList />
         </div>
-      </main>
+
+        <Modal isOpen={isAddModalOpen} onClose={handleCloseAddModal} title="Add Team Member">
+          <AddTeamMember />
+        </Modal>
     </div>
   );
 };
 
-export default Settings;
+export default TeamsPage;

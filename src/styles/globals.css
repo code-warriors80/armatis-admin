@@ -147,3 +147,20 @@ p {
     color: var(--foreground);
   }
 }
+
+@layer utilities {
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.35s ease-out forwards;
+  }
+}
