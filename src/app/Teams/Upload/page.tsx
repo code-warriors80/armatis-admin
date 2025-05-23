@@ -100,7 +100,7 @@ export default function TeamUploadPage() {
             <div className="flex items-center gap-4">
               <label
                 htmlFor="image"
-                className="cursor-pointer flex items-center gap-2 bg-[#EE2A55] text-white px-4 py-2 rounded-lg hover:bg-[#d51d46] transition-colors"
+                className=" flex items-center gap-2 bg-gradient-to-r from-red-500 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white px-4 py-2 rounded-lg transition-colors"
               >
                 <FaCloudUploadAlt />
                 Choose File
@@ -124,7 +124,7 @@ export default function TeamUploadPage() {
 
           <button
             type="submit"
-            className="w-full bg-[#EE2A55] hover:bg-[#d51d46] text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md"
+            className="w-full bg-gradient-to-r from-red-500 to-blue-300 hover:from-red-600 hover:to-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md"
           >
             Submit
           </button>

@@ -5,8 +5,9 @@ import { useState } from "react";
 import {
   Home,
   Users,
-  CreditCard,
-  ShieldCheck,
+  Package,
+  WifiHighIcon,
+   UserPlus,
   LogOut,
   Menu
 } from "lucide-react";
@@ -33,7 +34,7 @@ const Sidebar = () => {
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           aria-label="Toggle Sidebar"
-          className="mb-6 p-2 rounded-lg bg-[#EE2A66] text-white hover:bg-[#d92147] transition duration-300"
+          className="mb-6 p-2 rounded-lg bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white transition duration-300"
         >
           <Menu size={22} />
         </button>
@@ -48,20 +49,26 @@ const Sidebar = () => {
           />
           <SidebarItem
             href="/Teams"
-            icon={<Users size={20} />}
+            icon={<UserPlus size={20} />}
             text="Add new Member"
             isCollapsed={isCollapsed}
           />
           <SidebarItem
             href="/Products"
-            icon={<CreditCard size={20} />}
+            icon={<Package size={20} />}
             text="Add new Product"
             isCollapsed={isCollapsed}
           />
           <SidebarItem
             href="/Services"
-            icon={<ShieldCheck size={20} />}
+            icon={< WifiHighIcon size={30} />}
             text="Add new Service"
+            isCollapsed={isCollapsed}
+          />
+          <SidebarItem
+            href="/Subscribers"
+            icon={< Users size={20} />}
+            text="Subscribers"
             isCollapsed={isCollapsed}
           />
         </nav>
@@ -70,7 +77,7 @@ const Sidebar = () => {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="flex items-center gap-3 p-3 rounded-lg text-[#EE2A55] hover:bg-[#EE2A55] hover:text-white transition duration-300 w-full"
+        className="flex items-center gap-3 p-3 rounded-lg text-red-600 hover:bg-red-600 hover:text-white transition duration-300 w-full"
       >
         <LogOut size={20} />
         {!isCollapsed && <span className="text-sm font-medium">Logout</span>}
@@ -90,7 +97,7 @@ const SidebarItem = ({ href, icon, text, isCollapsed }: SidebarItemProps) => {
   return (
     <Link
       href={href}
-      className="flex items-center gap-3 p-3 rounded-lg hover:bg-[#EE2A55] hover:text-white text-sm font-medium transition duration-300 w-full"
+      className="flex items-center gap-3 p-3 rounded-lg hover:bg-red-600 hover:text-white text-sm font-medium transition duration-300 w-full"
     >
       {icon}
       {!isCollapsed && <span>{text}</span>}

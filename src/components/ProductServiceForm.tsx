@@ -26,7 +26,7 @@ export default function ProductServiceForm() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
       <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-          Add a New Product or Service
+          Add a New Product
         </h2>
 
         <div className="space-y-5">
@@ -61,7 +61,7 @@ export default function ProductServiceForm() {
             <div className="flex items-center gap-4">
               <label
                 htmlFor="image"
-                className="cursor-pointer flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+                className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition"
               >
                 <FaCloudUploadAlt />
                 Choose Image
@@ -97,9 +97,9 @@ export default function ProductServiceForm() {
           <div className="pt-4">
             <button
               onClick={handleSave}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
+              className="w-full bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
             >
-              Save Product
+              Add Product
             </button>
           </div>
         </div>

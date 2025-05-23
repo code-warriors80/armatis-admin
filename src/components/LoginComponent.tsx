@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 // import apiClient from "@/api/api-client";
 
 const LoginComponent = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -40,7 +40,7 @@ const LoginComponent = () => {
         </h2>
 
         {error && (
-          <p className="text-sm text-center mb-4 text-[#EE2A55]">{error}</p>
+          <p className="text-sm text-center mb-4 text-red-600">{error}</p>
         )}
 
         <form onSubmit={handleLogin} className="space-y-5">
@@ -51,7 +51,7 @@ const LoginComponent = () => {
             <input
               type="email"
               placeholder="example@gmail.com"
-              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:ring-2 focus:ring-[#EE2A55] focus:border-[#EE2A55] outline-none"
+              className="w-full p-3 border border-gray-300 rounded-lg mt-1 focus:ring-2 focus:ring-red-600 focus:border-red-600 outline-none"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -75,7 +75,7 @@ const LoginComponent = () => {
 
           <button
             type="submit"
-            className="w-full bg-[#EE2A66] text-white py-3 rounded-lg font-semibold hover:bg-[#EE2A55] transition-all duration-300"
+            className="w-full bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-[#EE2A55] transition-all duration-300"
           >
             {loading ? "Loading..." : "Log In"}
           </button>
