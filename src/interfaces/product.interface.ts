@@ -4,4 +4,5 @@ export interface IProduct {
   imageUrl?: string;
   link?: string;
   date?: Date;
+  createdAt?: Date;
 }

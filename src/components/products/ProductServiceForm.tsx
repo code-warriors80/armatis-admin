@@ -48,15 +48,13 @@ export default function ProductServiceForm() {
     } catch (error: any) {
       console.error('Failed to add product:', error.message || error);
     } finally {
-      setLoading
+      setLoading(false)
     }
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-50 p-6">
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Add a New Product</h2>
-
+    <div className="flex items-center justify-center">
+      <div className="w-full">
         <div className="space-y-5">
           <InputField
             label="Product Name"
@@ -115,7 +113,7 @@ export default function ProductServiceForm() {
               onClick={handleSubmit}
               className="w-full bg-[#EE2A55] text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
             >
-              Save Product
+              {loading ? 'loading' : 'Save Product'}
             </button>
           </div>
         </div>
