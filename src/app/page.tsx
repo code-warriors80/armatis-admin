@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import DashboardPage from "@/components/dashboard/dashboard-stats-card";
 import Modal from "@/components/shared/custom-modal";
 import AddTeamMember from "@/components/team/add-team";
-import ServicesCard from "@/components/service/service-card";
+import ServicesContainer from "@/components/service/service-container";
 import TeamContainer from "@/components/team/team-container";
 
 const Settings = () => {
@@ -21,7 +21,7 @@ const Settings = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         <TeamContainer onAddMember={handleOpenAddModal} />
-        <ServicesCard />
+        <ServicesContainer />
       </div>
 
       <Modal isOpen={isAddModalOpen} onClose={handleCloseAddModal} title="Add Team Member">

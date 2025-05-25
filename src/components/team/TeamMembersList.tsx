@@ -21,7 +21,11 @@ const TeamsMainPage = () => {
     try {
       const response = await fetchAllTeamMembersApi();
       if (response.members) {
-        setTeam(response.members);
+        // Sort by date (newest first) and slice top 5
+        const sorted = [...response.members].sort(
+          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+        setTeam(sorted.slice(0, 5));
       }
     } catch (error) {
       console.error(error);
@@ -54,7 +58,7 @@ const TeamsMainPage = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto">
       {loading ? (
         <div className="flex justify-center items-center h-40">
           <div className="w-10 h-10 border-4 border-[#EE2A55] border-t-transparent rounded-full animate-spin"></div>

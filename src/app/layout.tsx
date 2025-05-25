@@ -1,6 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
+import { ToastContainer } from 'react-toastify'
 
 export const metadata: Metadata = {
   title: "Love For You Admin-Dashboard",
@@ -17,6 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div className="flex-1 p-5 overflow-y-scroll h-screen">
             {children}
           </div>
+          <ToastContainer />
         </div>
       </body>
     </html>

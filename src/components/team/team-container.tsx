@@ -12,8 +12,8 @@ const TeamContainer = ({ onAddMember }: Props) => {
     <div className="bg-white shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-xl font-semibold text-gray-800">Update Teams info</h2>
-          <p className="text-gray-600">Manage your Teams page here.</p>
+          <h2 className="text-xl font-semibold text-gray-800">Recently Added Members</h2>
+          <p className="text-gray-600">Manage all recently added team members</p>
         </div>
         <button
           onClick={onAddMember}
