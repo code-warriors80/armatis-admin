@@ -1,5 +1,12 @@
 {
-  "name": "loveforyou",
+  "name": "amartis-dashboard",
+  "description": "A dashboard for Amartis",
+  "keywords": [
+    "dashboard",
+    "amartis",
+    "react",
+    "nextjs"
+  ],
   "version": "0.1.0",
   "private": true,
   "scripts": {
