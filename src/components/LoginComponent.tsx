@@ -12,24 +12,12 @@ const LoginComponent = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      router.push("/");
-    }
-  }, [router]);
+
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // try {
-    //   setLoading(true);
-    //   const response = await apiClient.post("/admin/login", { email, password });
-    //   localStorage.setItem("token", response.data.data.token);
-    //   router.push("/");
-    // } catch (err) {
-    //   setError("An error occurred. Please try again.");
-    //   setLoading(false);
-    // }
   };
 
   return (
