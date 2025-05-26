@@ -80,12 +80,6 @@ const LoginComponent = () => {
             {loading ? "Loading..." : "Log In"}
           </button>
         </form>
-
-        <div className="relative flex items-center my-6">
-          <div className="flex-grow border-t border-gray-300"></div>
-          <span className="mx-4 text-sm text-gray-600">or</span>
-          <div className="flex-grow border-t border-gray-300"></div>
-        </div>
       </div>
     </div>
   );
