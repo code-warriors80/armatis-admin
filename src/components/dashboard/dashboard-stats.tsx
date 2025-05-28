@@ -6,8 +6,8 @@ import { ReactNode } from 'react';
 interface DashboardStatsCardProps {
   icon: ReactNode;
   title: string;
-  value: string | number;
-  color?: string; // Tailwind color (e.g., 'bg-green-100 text-green-700')
+  value: ReactNode; // <-- Change from `string | number` to `React.ReactNode`
+  color: string;
 }
 
 export default function DashboardStatsCard({

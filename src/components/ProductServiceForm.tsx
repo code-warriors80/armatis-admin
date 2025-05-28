@@ -2,10 +2,10 @@
 'use client';
 
 import { useState, ChangeEvent } from 'react';
-import InputField from '../shared/InputField';
-import { TextAreaField } from '../shared/custom-text-area';
-import { ImageUploader } from '../shared/custom-image-uploader';
 import { addProductApi } from '@/service/product.api';
+import InputField from './shared/InputField';
+import { TextAreaField } from './shared/custom-text-area';
+import { ImageUploader } from './shared/custom-image-uploader';
 
 
 export default function ProductServiceForm() {
@@ -48,7 +48,7 @@ export default function ProductServiceForm() {
     } catch (error: any) {
       console.error('Failed to add product:', error.message || error);
     } finally {
-      setLoading
+      setLoading(false)
     }
   };
 
@@ -115,7 +115,7 @@ export default function ProductServiceForm() {
               onClick={handleSubmit}
               className="w-full bg-[#EE2A55] text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
             >
-              Save Product
+              {loading ? 'loading....' : 'Save Product'}
             </button>
           </div>
         </div>

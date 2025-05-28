@@ -1,11 +1,15 @@
 'use client'
+
 import React, { useState, useRef, useEffect } from 'react'
 import { MoreVertical } from 'lucide-react'
 import { IProduct } from '@/interfaces/product.interface'
 import { timeAgo } from '@/utils/time-ago'
 
+interface ProductCardProps {
+  product: IProduct;
+}
 
-export default function ProductCard({ product }: { product: IProduct }) {
+export default function ProductCard({ product }: ProductCardProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -15,19 +19,20 @@ export default function ProductCard({ product }: { product: IProduct }) {
         setMenuOpen(false)
       }
     }
+
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [])
 
-  const handleEdit = (e: React.MouseEvent) => {
+  const handleEdit = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     alert(`Edit ${product.title}`)
     setMenuOpen(false)
   }
 
-  const handleDelete = (e: React.MouseEvent) => {
+  const handleDelete = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     alert(`Delete ${product.title}`)
     setMenuOpen(false)
@@ -86,7 +91,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
           )}
           {product.createdAt && (
             <p className="text-gray-400 text-xs mt-2">
-              {timeAgo(product.createdAt!)}
+              {timeAgo(new Date(product.createdAt))}
             </p>
           )}
         </div>

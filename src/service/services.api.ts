@@ -2,7 +2,16 @@
 import apiClient from "@/api/api-client";
 import { IService } from "@/interfaces/service.interface";
 
-export const addServiceApi = async (data: IService) => {
+interface Service { 
+  title: string; description: string;
+}
+
+interface AddServicePayload {
+  category: string;
+  services: Service[];
+}
+
+export const addServiceApi = async (data: AddServicePayload) => {
   const response = await apiClient.post('/service/', data);
   return response.data;
 }

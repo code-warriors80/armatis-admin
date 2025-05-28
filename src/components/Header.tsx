@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiLogOut, FiMail } from 'react-icons/fi';
+import { fetchAllSubscribersApi } from '@/service/newsletter.api';
 
 interface HeaderProps {
   title: string;
@@ -10,17 +13,16 @@ interface HeaderProps {
   userImageUrl?: string;
 }
 
-const newsletterEmails = [
-  'jane.doe@email.com',
-  'john.smith@email.com',
-  'subscriber@email.com',
-  'info@email.com',
-];
+interface Subscriber {
+  email: string;
+}
 
 const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps) => {
-  const router = useRouter();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [newsletter, setNewsletter] = useState<Subscriber[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleLogout = () => {
     if (typeof window !== 'undefined') {
@@ -29,21 +31,35 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
     router.push('/auth');
   };
 
-  const getInitials = (name: string) => {
-    return name
+  const getInitials = (name: string) =>
+    name
       .split(' ')
       .map((n) => n[0])
       .join('')
       .toUpperCase();
-  };
 
-  // Close dropdown if clicked outside
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
+    const fetchNewsletter = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchAllSubscribersApi();
+        setNewsletter(response.data as Subscriber[]);
+      } catch (error) {
+        console.error('Failed to fetch newsletter subscribers:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNewsletter();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setDropdownOpen(false);
       }
-    }
+    };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -56,8 +72,6 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
       </div>
 
       <div className="flex items-center gap-4 relative" ref={dropdownRef}>
-
-        {/* User Avatar */}
         {userImageUrl ? (
           <img
             src={userImageUrl}
@@ -70,7 +84,7 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
           </div>
         )}
 
-                {/* Newsletter Dropdown Trigger */}
+        {/* Newsletter Icon */}
         <button
           onClick={() => setDropdownOpen(!dropdownOpen)}
           className="text-gray-600 hover:text-[#EE2A55] transition"
@@ -79,24 +93,30 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
           <FiMail size={22} />
         </button>
 
-        {/* Dropdown Panel */}
+        {/* Newsletter Dropdown */}
         {dropdownOpen && (
-          <div className="absolute right-10 top-15 z-10 w-64 bg-white border rounded-md shadow-lg p-4 text-sm">
+          <div className="absolute right-10 top-14 z-10 w-64 bg-white border rounded-md shadow-lg p-4 text-sm">
             <h3 className="font-semibold text-black mb-2 text-xl">Newsletter Subscribers</h3>
             <ul className="max-h-48 overflow-y-auto">
-              {newsletterEmails.map((email, index) => (
-                <li
-                  key={index}
-                  className="text-gray-600 py-1 border-b border-gray-100 last:border-none"
-                >
-                  {email}
-                </li>
-              ))}
+              {loading ? (
+                <li className="text-gray-400">Loading...</li>
+              ) : newsletter.length > 0 ? (
+                newsletter.map((subscriber, index) => (
+                  <li
+                    key={index}
+                    className="text-gray-600 py-1 border-b border-gray-100 last:border-none"
+                  >
+                    {subscriber.email}
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-500 italic">No subscribers yet.</li>
+              )}
             </ul>
           </div>
         )}
 
-        {/* Logout Icon Button */}
+        {/* Logout Icon */}
         <button
           onClick={handleLogout}
           className="text-gray-600 hover:text-[#EE2A55] transition"
