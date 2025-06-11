@@ -88,7 +88,7 @@ export default function ServiceForm() {
           <div className="pt-6">
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300"
+              className="w-full bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white font-semibold py-3 rounded-xl shadow-md transition duration-300"
             >
               Save Service
             </button>
