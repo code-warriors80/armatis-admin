@@ -16,5 +16,9 @@ export function middleware(req: NextRequest) {
 
 // Specify which paths to apply the middleware
 export const config = {
+<<<<<<< HEAD
   matcher: ["/", "/messages", "/Products", "/Services", "/Subsribers", "Team"],
+=======
+  matcher: ["/", "/Messasge", "/Product", "/Services"],
+>>>>>>> 1e06c5b5661de31065ed82ed5f4afab356b67b6f
 };

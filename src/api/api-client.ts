@@ -2,11 +2,8 @@ import axios, { AxiosInstance, AxiosError, AxiosResponse } from "axios";
 
 // Create an Axios instance
 const apiClient: AxiosInstance = axios.create({
-  baseURL: "https://loveforyou-backend.onrender.com/api/v1",
-  timeout: 10000,
-  headers: {
-    "Content-Type": "application/json",
-  },
+  baseURL: "https://amarits-backend.onrender.com/api/v1",
+  timeout: 100000,
   withCredentials: true,
 });
 

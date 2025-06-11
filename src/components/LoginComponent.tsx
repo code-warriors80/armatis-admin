@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 // import apiClient from "@/api/api-client";
 
 const LoginComponent = () => {
@@ -9,27 +8,15 @@ const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      router.push("/");
-    }
-  }, [router]);
+
+  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    // try {
-    //   setLoading(true);
-    //   const response = await apiClient.post("/admin/login", { email, password });
-    //   localStorage.setItem("token", response.data.data.token);
-    //   router.push("/");
-    // } catch (err) {
-    //   setError("An error occurred. Please try again.");
-    //   setLoading(false);
-    // }
+    setLoading(true)
   };
 
   return (

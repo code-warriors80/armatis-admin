@@ -98,11 +98,4 @@ export const useAuth = (): AuthContextType => {
   }
   return context;
 };
-function setUser(arg0: null) {
-  throw new Error('Function not implemented.');
-}
-
-function setToken(arg0: null) {
-  throw new Error('Function not implemented.');
-}
 
