@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FiLogOut, FiMail } from 'react-icons/fi';
 import { fetchAllSubscribersApi } from '@/service/newsletter.api';
@@ -73,9 +73,11 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
 
       <div className="flex items-center gap-4 relative" ref={dropdownRef}>
         {userImageUrl ? (
-          <img
+          <Image
             src={userImageUrl}
             alt="User Avatar"
+            width={40}
+            height={40}
             className="w-10 h-10 rounded-full object-cover border-2 border-[#EE2A55]"
           />
         ) : (

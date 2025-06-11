@@ -16,7 +16,7 @@ const Settings = () => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-4 bg-gray-50">
-      <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+      <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
       <DashboardPage />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
