@@ -53,9 +53,17 @@ export default function ProductServiceForm() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="flex items-center justify-center bg-gray-50 p-6">
       <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Add a New Product</h2>
+=======
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
+      <div className="w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          Add a New Product
+        </h2>
+>>>>>>> 4a96883b745667652b4eafa22041447faed968dc
 
         <div className="space-y-5">
           <InputField
@@ -74,6 +82,7 @@ export default function ProductServiceForm() {
             required
           />
 
+<<<<<<< HEAD
           <InputField
             label="Link (optional)"
             value={link}
@@ -86,6 +95,31 @@ export default function ProductServiceForm() {
             onImageChange={handleImageChange}
             preview={preview}
           />
+=======
+          {/* Image Upload */}
+          <div>
+            <label className="block mb-1 text-sm font-medium text-gray-700">Upload Product Image</label>
+            <div className="flex items-center gap-4">
+              <label
+                htmlFor="image"
+                className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white px-4 py-2 rounded-lg hover:bg-red-500 transition"
+              >
+                <FaCloudUploadAlt />
+                Choose Image
+              </label>
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+              />
+              {image && (
+                <span className="text-sm text-gray-600">{image.name}</span>
+              )}
+            </div>
+          </div>
+>>>>>>> 4a96883b745667652b4eafa22041447faed968dc
 
           {preview && (
             <div className="mt-6 text-center">
@@ -112,10 +146,17 @@ export default function ProductServiceForm() {
 
           <div className="pt-4">
             <button
+<<<<<<< HEAD
               onClick={handleSubmit}
               className="w-full bg-[#EE2A55] text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
             >
               {loading ? 'loading....' : 'Save Product'}
+=======
+              onClick={handleSave}
+              className="w-full bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white font-semibold py-3 rounded-lg transition-all duration-200 shadow-md"
+            >
+              Add Product
+>>>>>>> 4a96883b745667652b4eafa22041447faed968dc
             </button>
           </div>
         </div>
