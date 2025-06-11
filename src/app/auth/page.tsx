@@ -10,7 +10,7 @@ export default function AuthPage() {
     if (localStorage.getItem("admin-auth")) {
       router.push("/auth"); // Redirect to dashboard if already logged in
     }
-  }, []);
+  }, [router]);
 
   return <LoginComponent />;
 }
