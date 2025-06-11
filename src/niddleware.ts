@@ -16,5 +16,5 @@ export function middleware(req: NextRequest) {
 
 // Specify which paths to apply the middleware
 export const config = {
-  matcher: ["/", "/users", "/subscriptions", "/moderation", "/analytics", "/settings"],
+  matcher: ["/", "/messages", "/Products", "/Services", "/Subsribers", "Team"],
 };
