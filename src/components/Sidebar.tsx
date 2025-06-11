@@ -59,7 +59,7 @@ export default function Sidebar() {
       {/* Footer / Version / Profile */}
       {!isCollapsed && (
         <div className="p-4 border-t text-sm text-gray-500">
-          © 2025 CodeWarriors
+          © 2025 Amarits Consulting
         </div>
       )}
     </div>

@@ -82,7 +82,7 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mt-5">
         <Loader2 className="animate-spin text-blue-600 w-12 h-12" />
       </div>
     );
