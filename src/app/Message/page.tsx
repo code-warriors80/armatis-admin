@@ -5,7 +5,7 @@ import React from 'react'
 const MessagePage = () => {
   return (
     <div className="">
-      <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+      <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
 
       {/* Add spacing between header and title */}
       <div className="mt-6 mb-4">

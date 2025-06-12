@@ -1,6 +1,6 @@
 'use client'
-
 import React, { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import { MoreVertical } from 'lucide-react'
 import { IProduct } from '@/interfaces/product.interface'
 import { timeAgo } from '@/utils/time-ago'
@@ -77,13 +77,15 @@ export default function ProductCard({ product }: ProductCardProps) {
         rel={product.link ? 'noopener noreferrer' : undefined}
         className="block"
       >
-        {product.imageUrl && (
-          <img
-            src={product.imageUrl}
+          <Image
+            src={product.imageUrl || '/placeholder.png'}
             alt={product.title}
+            width={400}
+            height={192}
             className="w-full h-48 object-cover"
+            style={{ objectFit: 'cover' }}
+            priority={true}
           />
-        )}
         <div className="p-4">
           <h3 className="font-semibold text-lg mb-2">{product.title}</h3>
           {product.description && (

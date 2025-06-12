@@ -13,7 +13,7 @@ const TeamsPage = () => {
   const handleCloseAddModal = () => setIsAddModalOpen(false);
   return (
     <div className="">
-        <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+        <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
         
         <div className="mt-5">
           <div className="flex justify-between items-center mb-4">

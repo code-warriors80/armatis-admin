@@ -12,7 +12,7 @@ export default function TeamUploadPage() {
 
       {/* Main Content */}
       <main className="flex-1 px-6 py-8">
-        <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+        <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
         
         <div className="mt-3 shadow-md rounded-lg p-6">
             <div className="space-y-4">

@@ -13,7 +13,7 @@ export default function ServicePage() {
 
   return (
     <div>
-        <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+        <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
         {/* Add spacing between header and title */}
           <div className="mt-5">
 

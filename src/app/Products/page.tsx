@@ -13,7 +13,7 @@ export default function TeamUploadPage() {
   const handleCloseAddModal = () => setIsAddModalOpen(false);
   return (
     <div>
-        <Header title="Amartis-Consulting" subtitle="Administrative Dashboard" />
+        <Header title="Amarits-Consulting" subtitle="Administrative Dashboard" />
         
         <div>
           <div className="flex justify-between items-center my-4">
