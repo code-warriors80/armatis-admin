@@ -10,9 +10,7 @@ import {
   Menu,
   LayoutDashboard,
   MessageCircle,
-  LogOut
 } from 'lucide-react';
-import { useRouter } from "next/navigation";
 
 const sidebarItems = [
   { href: '/', icon: <LayoutDashboard size={20} />, text: 'Dashboard' },
@@ -25,14 +23,7 @@ const sidebarItems = [
 export default function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const pathname = usePathname();
-  const router = useRouter();
 
-  const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-    }
-    router.push('/auth');
-  };
 
   return (
     <div
@@ -67,112 +58,36 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer / Version / Profile */}
-      {!isCollapsed && (
-        <div className="p-4 border-t text-sm text-gray-500">
-          © 2025 CodeWarriors
+          {!isCollapsed && (
+            <div className="p-4 border-t text-sm text-gray-500">
+              © 2025 CodeWarriors
+            </div>
+          )}
         </div>
-      )}
-    </div>
-=======
-  const router = useRouter();
-
-  const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
+      );
     }
-    router.push('/auth');
-  };
-
-  return (
-    <aside
-      className={`h-screen bg-white border-r border-gray-200 shadow-sm text-[#EE2A55] transition-all duration-300
-        ${isCollapsed ? "w-20" : "w-64"} flex flex-col justify-between px-3 py-4`}
-    >
-      <div>
-        {/* Toggle Button */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          aria-label="Toggle Sidebar"
-          className="mb-6 p-2 rounded-lg bg-gradient-to-r from-red-600 to-blue-400 hover:from-red-600 hover:to-blue-500 text-white transition duration-300"
+    
+    type SidebarItemProps = {
+      href: string;
+      icon: React.ReactNode;
+      text: string;
+      isCollapsed: boolean;
+      isActive: boolean;
+    };
+    
+    function SidebarItem({ href, icon, text, isCollapsed, isActive }: SidebarItemProps) {
+      return (
+        <Link
+          href={href}
+          className={`flex items-center gap-3 p-3 rounded-md transition-all group
+            ${isActive ? 'bg-[#EE2A55] text-white' : 'text-[#EE2A55] hover:bg-[#fce6eb]'}
+            ${isCollapsed ? 'justify-center' : ''}
+          `}
         >
-          <Menu size={22} />
-        </button>
-
-        {/* Navigation */}
-        <nav className="space-y-1">
-          <SidebarItem
-            href="/"
-            icon={<Home size={20} />}
-            text="Home"
-            isCollapsed={isCollapsed}
-          />
-          <SidebarItem
-            href="/Teams"
-            icon={<UserPlus size={20} />}
-            text="Add new Member"
-            isCollapsed={isCollapsed}
-          />
-          <SidebarItem
-            href="/Products"
-            icon={<Package size={20} />}
-            text="Add new Product"
-            isCollapsed={isCollapsed}
-          />
-          <SidebarItem
-            href="/Services"
-            icon={< WifiHighIcon size={30} />}
-            text="Add new Service"
-            isCollapsed={isCollapsed}
-          />
-          <SidebarItem
-            href="/Subscribers"
-            icon={< Users size={20} />}
-            text="Subscribers"
-            isCollapsed={isCollapsed}
-          />
-        </nav>
-      </div>
-
-      {/* Logout Button */}
-      <button
-        onClick={handleLogout}
-        className="flex items-center gap-3 p-3 rounded-lg text-red-600 hover:bg-red-600 hover:text-white transition duration-300 w-full"
-      >
-        <LogOut size={20} />
-        {!isCollapsed && <span className="text-sm font-medium">Logout</span>}
-      </button>
-
-      {/* Footer / Version / Profile */}
-      {!isCollapsed && (
-        <div className="p-4 border-t text-sm text-gray-500">
-          © 2025 CodeWarriors
-        </div>
-      )}
-    </div>
-  );
-}
-
-type SidebarItemProps = {
-  href: string;
-  icon: React.ReactNode;
-  text: string;
-  isCollapsed: boolean;
-  isActive: boolean;
-};
-
-function SidebarItem({ href, icon, text, isCollapsed, isActive }: SidebarItemProps) {
-  return (
-    <Link
-      href={href}
-      className={`flex items-center gap-3 p-3 rounded-md transition-all group
-        ${isActive ? 'bg-[#EE2A55] text-white' : 'text-[#EE2A55] hover:bg-[#fce6eb]'}
-        ${isCollapsed ? 'justify-center' : ''}
-      `}
-    >
-      <span className={`group-hover:text-[#EE2A55] text-[#EE2A55] ${isActive && 'text-white'}`}>{icon}</span>
-      {!isCollapsed && (
-        <span className="text-sm font-medium">{text}</span>
-      )}
-    </Link>
-  );
-}
+          <span className={`group-hover:text-[#EE2A55] text-[#EE2A55] ${isActive && 'text-white'}`}>{icon}</span>
+          {!isCollapsed && (
+            <span className="text-sm font-medium">{text}</span>
+          )}
+        </Link>
+      );
+    }
