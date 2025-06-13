@@ -1,23 +1,48 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useState, useEffect } from "react";
-// import apiClient from "@/api/api-client";
+import { loginApi, userProfileApi } from "@/service/auth.api";
+import { useState } from "react";
+import {useRouter} from 'next/navigation'
+import { toast } from 'react-toastify';
+import { useAuthStore } from "@/store/useAuthStore"; // if using Zustand
+
 
 const LoginComponent = () => {
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter()
+  const { setUser } = useAuthStore(); // setUser from Zustand
 
-  useEffect(() => {
-
-  }, []);
 
   const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+    e.preventDefault()
+    setError('')
     setLoading(true)
-  };
+
+    try {
+      const {success, message} = await loginApi(
+        email,
+        password,
+      )
+      if(success) {
+        router.replace("/")
+        toast.success(message)
+        const {success, user} = await userProfileApi()
+        if(success) {
+          setUser(user as any);
+        }
+      }
+    } catch (err: any) {
+      setError(
+        err.response?.data?.message || 'Login failed. Please try again.'
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">

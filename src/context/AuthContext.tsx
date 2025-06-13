@@ -1,101 +1,77 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from 'react';
-import axios, { AxiosError } from 'axios';
-import { toast } from 'react-toastify/unstyled';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
 
-// Define user type
-interface User {
-  id: string;
-  name: string;
-  email: string;
+import { isAuthenticatedApi, userProfileApi } from '@/service/auth.api'
+import { useAuthStore } from '@/store/useAuthStore'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
+
+type UserContextType = {
+  user: any
+  setUser: (user: any) => void
 }
 
-// Define context type
-interface AuthContextType {
-  user: User | null;
-  token: string | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-  loading: boolean;
-  error: string | null;
-}
+const UserContext = createContext<UserContextType | undefined>(undefined)
 
-// Create context
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Provider props
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-// Provider
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const { setUser, user } = useAuthStore()
+  const [loading, setLoading] = useState(true)
+  const pathname = usePathname()
+  const isAuthPage = pathname.startsWith('/auth')
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('authToken');
-    const savedUser = localStorage.getItem('authUser');
-    if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-    }
-    setLoading(false);
-  }, []);
-
-  const login = async (email: string, password: string) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.post('/api/login', { email, password });
-      const { user, token } = response.data;
-
-      setUser(user);
-      setToken(token);
-      localStorage.setItem('authUser', JSON.stringify(user));
-      localStorage.setItem('authToken', token);
-    } catch (err: unknown) {
-      let errorMessage = 'An unexpected error occurred.';
-    
-      const axiosError = err as AxiosError<{ message: string }>;
-      if (axiosError.response?.data?.message) {
-        errorMessage = axiosError.response.data.message;
+    const checkAuth = async () => {
+      // If on an /auth route, no need to verify
+      if (isAuthPage) {
+        setLoading(false)
+        return
       }
-    
-      setError(errorMessage);
-      toast.error(errorMessage);
+
+      try {
+        const authRes = await isAuthenticatedApi()
+
+        if (!authRes.success) {
+          window.location.href = '/auth/login'
+          return
+        }
+
+        const profileRes = await userProfileApi()
+        if (profileRes.success) {
+          setUser(profileRes.user as any)
+        } else {
+          window.location.href = '/auth/login'
+        }
+      } catch (error) {
+        console.error('Authentication error:', error)
+        window.location.href = '/auth/login'
+      } finally {
+        setLoading(false)
+      }
     }
-    
-  }; 
-  
-  const logout = () => {
-    setUser(null);
-    setToken(null);
-    localStorage.removeItem('authUser');
-    localStorage.removeItem('authToken');
-  };
+
+    checkAuth()
+  }, [isAuthPage])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+      </div>
+    )
+  }
+
+  // Don't render children at all if we're on a protected page and not authenticated yet
+  if (!isAuthPage && !user) return null
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, loading, error }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
-    </AuthContext.Provider>
-  );
-};
+    </UserContext.Provider>
+  )
+}
 
-// Optional: Custom hook to access auth context safely
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
-
+export const useUser = () => {
+  const context = useContext(UserContext)
+  if (!context) throw new Error('useUser must be used inside UserProvider')
+  return context
+}

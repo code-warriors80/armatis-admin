@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -5,6 +6,8 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FiLogOut, FiMail } from 'react-icons/fi';
 import { fetchAllSubscribersApi } from '@/service/newsletter.api';
+import { logoutApi } from '@/service/auth.api';
+import { useAuthStore } from '@/store/useAuthStore';
 
 interface HeaderProps {
   title: string;
@@ -17,12 +20,13 @@ interface Subscriber {
   email: string;
 }
 
-const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps) => {
+const Header = ({ title, subtitle, userImageUrl }: HeaderProps) => {
   const [newsletter, setNewsletter] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const { logout, user } = useAuthStore(); // setUser from Zustand
 
 
   const getInitials = (name: string) =>
@@ -58,14 +62,12 @@ const Header = ({ title, subtitle, userName = 'JD', userImageUrl }: HeaderProps)
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  function handleLogout(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    event.preventDefault();
-    // Clear user session (example: remove token from localStorage)
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
+  const handleLogout = async () => {
+    const {success} = await logoutApi();
+    if(success) {
+      await logout()
+      router.push('/auth/login');
     }
-    // Redirect to login page
-    router.push('/login');
   }
 
 return (
@@ -86,14 +88,14 @@ return (
         />
       ) : (
         <div className="w-10 h-10 rounded-full bg-[#EE2A55] flex items-center justify-center text-white font-semibold text-lg select-none border-2 border-[#EE2A55]">
-          {getInitials(userName)}
+          {getInitials(user?.userName!)}
         </div>
       )}
 
       {/* Newsletter Icon */}
       <button
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="text-gray-600 hover:text-[#EE2A55] transition"
+        className="bg-[#EE2A55] p-2 rounded-lg text-white transition"
         aria-label="Newsletter"
       >
         <FiMail size={22} />
@@ -125,7 +127,7 @@ return (
       {/* Logout Icon */}
       <button
         onClick={handleLogout}
-        className="text-gray-600 hover:text-[#EE2A55] transition"
+        className="bg-[#EE2A55] p-2 rounded-lg text-white transition"
         aria-label="Logout"
       >
         <FiLogOut size={22} />
